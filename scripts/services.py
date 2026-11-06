@@ -62,8 +62,13 @@ def start():
         deadline=time.monotonic()+100
         while time.monotonic()<deadline:
             try:
-                with urlopen('http://localhost:8888/customers',timeout=5) as response:
-                    if response.status==200: print('Passerelle prête.',flush=True);return
+                # Eureka and LoadBalancer caches may discover each service at different times.
+                # Read-only probes ensure every route is ready before tests can create data.
+                for path in ('customers','products','bills'):
+                    with urlopen('http://localhost:8888/'+path,timeout=5) as response:
+                        if response.status != 200: raise RuntimeError('Route indisponible : '+path)
+                print('Passerelle prête : clients, produits et factures.',flush=True)
+                return
             except Exception: pass
             time.sleep(2)
         raise RuntimeError('Routes non disponibles. Vérifier Eureka et les journaux.')
