@@ -3,6 +3,9 @@ spring:
     gateway:
       server:
         webflux:
+          discovery:
+            locator:
+              enabled: false
           routes:
             - id: customers-static
               uri: http://localhost:8081

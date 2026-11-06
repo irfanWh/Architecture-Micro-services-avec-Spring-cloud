@@ -39,3 +39,4 @@ data/
 logs/
 .pids/
 *.log
+__pycache__/

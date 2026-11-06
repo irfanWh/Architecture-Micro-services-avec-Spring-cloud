@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MicroServicesSpringCloudApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MicroServicesSpringCloudApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(MicroServicesSpringCloudApplication.class, args);
+  }
 }
